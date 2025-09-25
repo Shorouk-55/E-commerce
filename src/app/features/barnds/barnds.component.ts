@@ -6,10 +6,11 @@ import { FilterPipe } from '../../shared/pipes/filter-pipe';
 import { CommonModule } from '@angular/common';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { map, switchMap } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-barnds',
-  imports: [NgxPaginationModule, FormsModule, FilterPipe, CommonModule],
+  imports: [NgxPaginationModule, FormsModule, FilterPipe, CommonModule, RouterLink],
   templateUrl: './barnds.component.html',
   styleUrl: './barnds.component.css'
 })

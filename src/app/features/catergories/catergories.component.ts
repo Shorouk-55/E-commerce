@@ -1,9 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AllCategoriesService } from './services/all-categories.service';
-import { data } from '../../core/models/product/products.interface';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { ACategory } from './models/category.interface';
 import { FilterPipe } from '../../shared/pipes/filter-pipe';
 import { RouterLink } from '@angular/router';

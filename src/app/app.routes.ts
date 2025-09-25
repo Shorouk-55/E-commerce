@@ -17,6 +17,7 @@ import { AllordersComponent } from './features/allorders/allorders.component';
 import { ForgetPasswordComponent } from './core/auth/forgetPassword/forget-password/forget-password.component';
 import { DetailsOfProductComponent } from './features/details-of-product/details-of-product.component';
 import { WishlistComponent } from './features/wishlist/wishlist.component';
+import { SpacificBrandComponent } from './features/barnds/spacific-brand/spacific-brand.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -45,9 +46,10 @@ export const routes: Routes = [
             { path: 'details/:slug/:id', component: DetailsComponent, title: 'details page' },
             { path: 'details/:id', component: DetailsComponent, title: 'details page' },
             { path: 'checkout/:id', component: CheckoutComponent, title: 'checkout page' },
+            { path: 'spacificBrand/:id', component: SpacificBrandComponent, title: 'Brand details' },
             { path: 'cart', component: CartComponent, title: 'cart page' },
             { path: 'allorders', component: AllordersComponent, title: 'allOrders' },
-            { path: 'detailsOfCategory/:id', component: DetailsOfProductComponent, title: 'detailsOfCategory' },
+            { path: 'details-of-product/:id', component: DetailsOfProductComponent, title: 'detailsOfCategory' },
         ]
     },
     { path: '**', component: NotfoundComponent, title: 'notfound' }

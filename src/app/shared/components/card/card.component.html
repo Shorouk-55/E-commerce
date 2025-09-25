@@ -24,9 +24,9 @@
             <!-- content container -->
             <div class="p-2">
                 <div class="flex items-center justify-between">
-                    <h5 class="mb-2 font-bold tracking-tight text-gray-900">
+                    <h6 class="mb-2 font-medium tracking-tight text-gray-900">
                         {{ product.title | split: 2 }}
-                    </h5>
+                    </h6>
 
                     @if (!isInWishlist(product._id)) {
                     <i (click)="addProductToWishList(product._id, $event)"
@@ -51,7 +51,7 @@
 
         </a>
         <button (click)="addProductToCart(product._id)"
-            class="btn pb-1 md:translate-y-[120%] group-hover/card:-translate-y-2">
+            class="btn pb-1 md:translate-y-[165%] group-hover/card:-translate-y-2">
             Add to cart
         </button>
     </div>

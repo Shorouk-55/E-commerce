@@ -30,19 +30,20 @@
             <!-- Grid Container -->
             <div
                 class="grid gap-4 sm:gap-6 grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-                @for (brand of allCategoriesData|filter:test|paginate: {
-                id: 'brandsPagination',
+                @for (category of allCategoriesData|filter:test|paginate: {
+                id: 'foo',
                 itemsPerPage: pageSize,
                 currentPage: p,
                 totalItems: total
-                }; track brand._id) {
+                }; track category._id) {
                 <div
                     class="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 overflow-hidden">
                     <!-- Image Container -->
                     <div class="relative overflow-hidden">
-                        <a href="#" class="block relative" [attr.aria-label]="'View ' + brand.name + ' details'">
+                        <a [routerLink]="['/details-of-product', category._id]" href="#" class="block relative"
+                            [attr.aria-label]="'View ' + category.name + ' details'">
                             <img class="w-full md:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
-                                [src]="brand.image" [alt]="brand.name + ' logo'" />
+                                [src]="category.image" [alt]="category.name + ' logo'" />
                             <!-- Loading shimmer effect -->
                             <div
                                 class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-all duration-700">
@@ -54,7 +55,7 @@
                         <a href="#" class="block group-hover:text-[#fd4393] transition-colors duration-200">
                             <h2
                                 class="text-lg sm:text-xl font-bold tracking-tight text-gray-900 line-clamp-2 leading-tight">
-                                {{ brand.name }}
+                                {{ category.name }}
                             </h2>
                         </a>
                     </div>
@@ -95,8 +96,8 @@
         <!-- Pagination -->
         @if((allCategoriesData|filter:test).length > 0) {
         <div class="flex justify-center pt-6 lg:pt-8">
-            <pagination-controls class="pagination-wrapper" id="brandsPagination"
-                (pageChange)="getAllCategoriesData($event)" previousLabel="‹ Previous" nextLabel="Next ›">
+            <pagination-controls class="pagination-wrapper" id="foo" (pageChange)="getAllCategoriesData($event)"
+                previousLabel="‹ Previous" nextLabel="Next ›">
             </pagination-controls>
         </div>
         }

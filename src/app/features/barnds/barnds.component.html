@@ -48,7 +48,7 @@
 
                     <!-- Image Container -->
                     <div class="relative overflow-hidden">
-                        <a href="#" class="block aspect-square relative"
+                        <a [routerLink]="['/spacificBrand',brand._id ]" href="#" class="block aspect-square relative"
                             [attr.aria-label]="'View ' + brand.name + ' details'">
                             <img class="w-full  object-cover transition-transform duration-300 
                             group-hover:scale-105" [src]="brand.image" [alt]="brand.name + ' logo'"

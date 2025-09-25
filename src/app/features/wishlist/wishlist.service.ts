@@ -22,7 +22,7 @@ export class WishlistService {
     getloggedUserWishList(): Observable<any> {
 
         if (!this.wishlistLoaded.getValue()) {
-            this.wishlistLoaded.next(true); console.log("asffsa", this.wishlistLoaded.value);
+            this.wishlistLoaded.next(true);
             return this.httpClient.get(environment.baseUrl + 'wishlist')
         }
         else {
