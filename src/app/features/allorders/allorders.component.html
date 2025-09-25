@@ -4,6 +4,7 @@
 
             <!-- Cart Section -->
             <div class="xl:col-span-8 bg-[#ded9fd] p-4 lg:p-6 rounded-2xl">
+                @if(allorders[0]; as order) {
                 <div class="mb-4 lg:mb-6">
                     <h3 class="text-2xl lg:text-4xl inline capitalize">
                         o<span class="text-[#FB2E86]">r</span>der
@@ -11,6 +12,7 @@
                     <span class="text-[#FB2E86] ml-2 text-sm lg:text-base">{{allorders[0].cartItems.length}}
                         items</span>
                 </div>
+                }
 
                 <!-- Mobile Card Layout -->
                 <div class="md:hidden space-y-4">
@@ -96,11 +98,14 @@
                                 <div><span class="font-medium">Phone:</span></div>
                                 <div><span class="font-medium">Email:</span></div>
                             </div>
+                            @if(allorders.length > 0 && allorders[0].user; as user) {
                             <div class="space-y-2 text-right">
-                                <div>{{allorders[0].user.name}}</div>
-                                <div>{{allorders[0].user.phone}}</div>
-                                <div class="truncate">{{allorders[0].user.email}}</div>
+                                <div>{{ user.name }}</div>
+                                <div>{{ user.phone }}</div>
+                                <div class="truncate">{{ user.email }}</div>
                             </div>
+                            }
+
                         </div>
                     </div>
 
@@ -111,6 +116,7 @@
                                 <div><span class="font-medium">Paid:</span></div>
                                 <div><span class="font-medium">Method:</span></div>
                             </div>
+                            @if(allorders.length > 0 && allorders[0].user; as user){
                             <div class="space-y-2 text-right">
                                 <div [class]="allorders[0].isDelivered ? 'text-green-600 font-medium' : 'text-red-600'">
                                     {{allorders[0].isDelivered ? 'Delivered' : 'Pending'}}
@@ -120,11 +126,13 @@
                                 </div>
                                 <div>{{allorders[0].paymentMethodType}}</div>
                             </div>
+                            }
                         </div>
                     </div>
 
                     <div class="bg-white/50 p-3 rounded-lg">
                         <div class="grid grid-cols-2 gap-2 text-sm">
+                            @if(allorders.length > 0 && allorders[0].user; as user){
                             <div class="space-y-2">
                                 <div><span class="font-medium">Tax:</span></div>
                                 <div><span class="font-medium text-lg">Total:</span></div>
@@ -133,12 +141,14 @@
                                 <div>{{allorders[0].taxPrice}} EGP</div>
                                 <div class="font-bold text-lg text-[#FB2E86]">{{allorders[0].totalOrderPrice}} EGP</div>
                             </div>
+                            }
                         </div>
                     </div>
                 </div>
 
                 <!-- Desktop Layout -->
                 <div class="hidden md:block space-y-4">
+                    @if(allorders.length > 0 && allorders[0].user; as user){
                     <div class="flex justify-between items-center py-2 border-b border-gray-300/50">
                         <span class="capitalize text-sm lg:text-base">full name:</span>
                         <span class="text-sm lg:text-base font-medium">{{allorders[0].user.name}}</span>
@@ -184,6 +194,7 @@
                         <span class="capitalize">total Price:</span>
                         <span class="text-[#FB2E86]">{{allorders[0].totalOrderPrice}} EGP</span>
                     </div>
+                    }
                 </div>
 
                 <button
