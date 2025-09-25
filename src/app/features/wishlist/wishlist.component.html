@@ -1,0 +1,151 @@
+<div class="max-w-7xl mx-auto">
+    <div class="p-4 sm:p-6 md:p-10 bg-[#e2dff8] rounded-2xl">
+        <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-center capitalize mb-5">
+            my wish<span class="text-[#FB2E86]">l</span>ist
+        </div>
+
+        <!-- Mobile Card Layout -->
+        <div class="block md:hidden space-y-4">
+            @for (item of wishListSet; track $index) {
+            <div class="bg-white rounded-lg shadow border border-gray-200 p-4">
+                <div class="flex items-start gap-3">
+                    <img [src]="item.imageCover" [alt]="item.slug"
+                        class="w-16 h-16 object-cover rounded bg-[#dfdbf9] shadow-[0_0_30px_#e7e4f8] flex-shrink-0">
+                    <div class="flex-grow min-w-0">
+                        <h3 class="font-semibold text-gray-900 text-sm mb-2 line-clamp-2">
+                            {{ item.title | split: 2 }}
+                        </h3>
+                        <div class="space-y-2 text-xs text-gray-600">
+                            <div class="flex justify-between">
+                                <span>Category:</span>
+                                <span class="font-medium">{{ item.category.name }}</span>
+                            </div>
+                            @if(!item.priceAfterDiscount) {
+                            <div class="flex justify-between">
+                                <span>Price:</span>
+                                <span class="font-semibold text-gray-900">{{ item.price }} EGP</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Sale Price:</span>
+                                <span class="text-gray-500 capitalize">No Sale</span>
+                            </div>
+                            } @else {
+                            <div class="flex justify-between">
+                                <span>Price:</span>
+                                <span class="line-through text-gray-400">{{ item.price }} EGP</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Sale Price:</span>
+                                <span class="font-bold text-[#FB2E86] text-sm">{{ item.priceAfterDiscount }} EGP</span>
+                            </div>
+                            }
+                        </div>
+                        <div class="mt-3 flex gap-2">
+                            <button (click)="addToCart(item._id)"
+                                class="flex-1 bg-[#FB2E86] text-white px-3 py-2 rounded text-xs font-medium hover:bg-[#e5267a] transition-colors cursor-pointer">
+                                <i class="fa-solid fa-cart-plus mr-1"></i>
+                                Add to Cart
+                            </button>
+                            <button (click)="removeFromWishlist(item._id)"
+                                class="p-2 text-red-500 hover:text-red-600 transition-colors cursor-pointer">
+                                <i class="fa-solid fa-trash text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <!-- Desktop Table Layout -->
+        <div class="hidden md:block">
+            <div class="overflow-x-auto rounded-lg border border-gray-200 shadow">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-100 text-gray-600 uppercase text-sm">
+                        <tr>
+                            <th class="px-4 lg:px-6 py-4 text-left font-semibold">Item</th>
+                            <th class="px-4 lg:px-6 py-4 text-center font-semibold">Category</th>
+                            <th class="hidden lg:table-cell px-6 py-4 text-center font-semibold">Details</th>
+                            <th class="px-4 lg:px-6 py-4 text-center font-semibold">Price</th>
+                            <th class="px-4 lg:px-6 py-4 text-center font-semibold">After Sale</th>
+                            <th class="px-4 lg:px-6 py-4 text-center font-semibold">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        @for (item of wishListSet; track $index) {
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 lg:px-6 py-4">
+                                <div class="flex items-center gap-2 lg:gap-3">
+                                    <img [src]="item.imageCover" [alt]="item.slug"
+                                        class="w-10 h-10 lg:w-12 lg:h-12 object-cover rounded bg-[#dfdbf9] shadow-[0_0_30px_#e7e4f8] flex-shrink-0" />
+                                    <div class="min-w-0">
+                                        <div class="font-semibold text-gray-900 text-sm lg:text-base truncate">
+                                            {{ item.title | split: 2 }}
+                                        </div>
+                                        <div class="text-xs text-gray-500 lg:hidden">{{ item.category.name }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="hidden md:table-cell px-4 lg:px-6 py-4 text-center">
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                                    {{ item.category.name }}
+                                </span>
+                            </td>
+                            <td class="hidden lg:table-cell px-6 py-4 text-center max-w-48">
+                                <p class="text-sm text-gray-600 truncate">
+                                    {{ item.description | split: 6 }}...
+                                </p>
+                            </td>
+                            <td class="px-4 lg:px-6 py-4 text-center">
+                                @if(item.priceAfterDiscount) {
+                                <span class="text-gray-400 line-through text-xs lg:text-sm">{{ item.price }} EGP</span>
+                                } @else {
+                                <span class="font-semibold text-sm lg:text-base">{{ item.price }} EGP</span>
+                                }
+                            </td>
+                            <td class="px-4 lg:px-6 py-4 text-center">
+                                @if(item.priceAfterDiscount) {
+                                <span class="font-bold text-[#FB2E86] text-sm lg:text-base">{{ item.priceAfterDiscount
+                                    }} EGP</span>
+                                <div class="text-xs text-green-600">Sale</div>
+                                } @else {
+                                <span class="text-gray-500 capitalize text-sm">No Sale</span>
+                                }
+                            </td>
+                            <td class="px-4 lg:px-6 py-4 text-center">
+                                <div class="flex items-center justify-center gap-1 lg:gap-2">
+                                    <button (click)="addToCart(item._id)"
+                                        class="bg-[#FB2E86] hover:bg-[#e5267a] text-white px-2 lg:px-3 py-1.5 lg:py-2 rounded text-xs lg:text-sm font-medium transition-colors">
+                                        <i class="fa-solid fa-cart-plus lg:mr-1"></i>
+                                        <span class="hidden lg:inline">Add to Cart</span>
+                                    </button>
+                                    <button (click)="removeFromWishlist(item._id)"
+                                        class="text-red-500 hover:text-red-600 p-1.5 lg:p-2 transition-colors">
+                                        <i class="fa-solid fa-trash text-sm"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        @if(wishListSet.length === 0) {
+        <div class="text-center py-12">
+            <div class="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                <i class="fa-regular fa-heart text-3xl text-gray-400"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Your wishlist is empty</h3>
+            <p class="text-gray-600 mb-6">Start adding items you love to keep track of them!</p>
+            <button routerLink="/products"
+                class="bg-[#FB2E86] hover:bg-[#e5267a] text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                Continue Shopping
+            </button>
+        </div>
+        }
+    </div>
+</div>

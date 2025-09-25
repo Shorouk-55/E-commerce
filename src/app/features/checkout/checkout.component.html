@@ -1,0 +1,31 @@
+<section class="py-5 shadow-2xl mx-auto px-3 my-10 md:w-1/2 capitalize text-center">
+    <div class="flex items-center justify-center gap-1">
+        <h1 class="text-center text-3xl font-bold mb-5 mt-3">chec<span class="text-[#fd4393]">k</span>out</h1>
+        <i class="fa-regular fa-circle-check text-xl text-[#fd4393]"></i>
+    </div>
+
+    <form [formGroup]="checkoutForm" (submit)="submitForm()">
+
+        <app-input [element]="'text'" [control]="checkoutForm.get('shippingAddress')?.get('details')"
+            [idInput]="'details'" [labelInput]="'details'"></app-input>
+
+
+        <app-input [control]="checkoutForm.get('shippingAddress')?.get('phone')" [idInput]="'phone'"
+            [labelInput]="'phone'" [typeInput]="'tel'">
+            accept only egypt phone number
+        </app-input>
+
+
+        <app-input [control]="checkoutForm.get('shippingAddress')?.get('city')" [idInput]="'city'" [labelInput]="'city'"
+            [typeInput]="'text'"></app-input>
+
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+            <button class="btn-main sm:w-full md:w-1/2">payment by visa</button>
+            <!-- <button class="btn-main sm:w-full md:w-1/2">payment by cash</button> -->
+        </div>
+
+
+    </form>
+
+</section>

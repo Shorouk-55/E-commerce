@@ -1,0 +1,62 @@
+<div class="relative mb-3 ">
+    <div class="relative">
+        @if(element === 'input'){
+        <input [class]="{'border-red-600 ': control?.invalid && control?.touched}"
+            [type]="typeInput || ( flag ? 'password' : 'text')" [id]="idInput" class="main-input peer" placeholder=""
+            [formControl]="control" />
+        }
+
+
+
+
+
+        @else if (element === 'text') {
+        <textarea style="min-height:50px; max-height:200px; resize:vertical;"
+            [class]="{'border-red-600 ': control?.invalid && control?.touched}" [id]="idInput" class="main-input peer"
+            placeholder="" [formControl]="control"></textarea>
+        }
+
+
+
+        <label [for]="idInput" class="main-lable">{{labelInput}}</label>
+        @if(idInput==='password' || idInput==='rePassword'){
+        <span (click)="flag = !flag" class="absolute end-4 -translate-y-1/2 top-1/2 cursor-pointer">
+            @if(flag){
+            <i class="fas fa-eye"></i>
+            }
+            @else {
+            <i class="fas fa-eye-slash"></i>
+            }
+        </span>
+        }
+    </div>
+    @if(control?.errors&& control?.touched){
+    <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert">
+        <span class="sr-only">Danger</span>
+        <div>
+            <ul class="mt-1.5 list-disc list-inside">
+                @if(control?.hasError('required') ){
+                <li>input is required</li>
+                }
+                @if(control?.hasError('minlength') ){
+                <li>min length is 2</li>
+                }
+                @if(control?.hasError('maxlength') ){
+                <li>max length is 20</li>
+                }
+                @if(control?.hasError('email') ){
+                <li>this email is not valid</li>
+                }
+                @if (control?.hasError('pattern')) {
+                <ng-content></ng-content>
+                }
+                @if (control?.hasError('mismached')) {
+                <li>must be the same as password</li>
+                }
+
+            </ul>
+        </div>
+    </div>
+    }
+</div>

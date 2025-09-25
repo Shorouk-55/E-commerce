@@ -1,0 +1,13 @@
+<section>
+    <!-- container class -->
+    <article class=" p-10">
+        <header class="text-3xl font-bold text-center capitalize mb-5">
+            popule<span class="text-[#fd4393]">r</span> products
+        </header>
+        <!-- @for (product of allproducts.slice(0, 12); track product.id) { -->
+        <app-card [allproducts]="allproducts() ?? []">
+        </app-card>
+        <!-- } -->
+    </article>
+
+</section>

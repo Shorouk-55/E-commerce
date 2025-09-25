@@ -1,0 +1,91 @@
+<nav [class.py-2]="scroll" class="bg-[#ded9fd] border-gray-200 fixed w-full z-20 top-0 left-0 border-b mynav">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2 md:p-4">
+    <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="/images/colorkit.svg" class="h-8" alt="Logo" />
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15" />
+      </svg>
+    </button>
+    <div class="hidden w-full grow md:flex md:w-auto " id="navbar-default">
+      @if(isLogin===true){
+      <ul class="ms-2 font-medium text-l flex flex-col p-4  md:flex-row md:p-0  md:space-x-2.5 items-center  ">
+
+        <li>
+          <a routerLinkActive="text-pink-600 tmd:ext-xl" routerLink="/home"
+            class="rounded-sm hover:bg-gray-100 md:hover:bg-transparent capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">Home</a>
+        </li>
+        <li>
+          <a routerLinkActive="text-pink-600 tmd:ext-xl" routerLink="/brands"
+            class="rounded-sm hover:bg-gray-100 md:hover:bg-transparent capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">brands</a>
+        </li>
+        <li>
+          <a routerLinkActive="text-pink-600 tmd:ext-xl" routerLink="/categories"
+            class="rounded-sm hover:bg-gray-100 md:hover:bg-transparent capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">categories</a>
+        </li>
+        <!-- <li>
+          <a routerLinkActive="text-pink-600 tmd:ext-xl" routerLink="/cart"
+            class="rounded-sm hover:bg-gray-100 md:hover:bg-transparent capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">cart</a>
+        </li> -->
+        <li>
+          <a routerLinkActive="text-pink-600 tmd:ext-xl" routerLink="/products"
+            class="rounded-sm hover:bg-gray-100 md:hover:bg-transparent capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">products</a>
+        </li>
+
+      </ul>
+      }
+      <ul class="ms-auto font-medium text-l flex flex-col p-4  md:flex-row md:p-0  md:space-x-2.5 ">
+
+        <li class="flex space-x-1">
+          <a href="#" class="capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">
+            <i class="fa-brands fa-facebook-f"></i>
+
+          </a>
+          <a href="#" class="capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">
+            <i class="fa-brands fa-whatsapp"></i>
+
+          </a>
+          <a href="#" class="capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">
+            <i class="fa-brands fa-instagram"></i>
+
+          </a>
+          <a href="#" class="capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">
+            <i class="fa-brands fa-twitter"></i>
+
+          </a>
+          @if(isLogin === true){
+          <a href="#" routerLink="/cart" routerLinkActive="text-pink-600  md:text-xl"
+            class="relative capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="absolute top-0 end-1 size-4 p-1 rounded-2xl bg-white text-sm flex items-center justify-center">
+              {{ count() }}</span>
+          </a>}
+        </li>
+        @if(isLogin === false){
+        <li>
+          <a routerLinkActive="text-pink-600  md:text-xl" routerLink="/login"
+            class="capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">login</a>
+        </li>
+        <li>
+          <a routerLinkActive="text-pink-600  md:text-xl" routerLink="/register"
+            class="capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">register</a>
+        </li>
+        }
+        @else {
+        <li>
+          <a (click)="singOut()" routerLinkActive="text-[#FB2E86] md:text-xl"
+            class="cursor-pointer capitalize block py-2 px-3 text-black hover:text-[#FB2E86] transition-colors duration-200">signout</a>
+        </li>
+        }
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>

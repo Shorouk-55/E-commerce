@@ -1,0 +1,197 @@
+<section class="my-4 px-4">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6">
+
+            <!-- Cart Section -->
+            <div class="xl:col-span-8 bg-[#ded9fd] p-4 lg:p-6 rounded-2xl">
+                <div class="mb-4 lg:mb-6">
+                    <h3 class="text-2xl lg:text-4xl inline capitalize">
+                        o<span class="text-[#FB2E86]">r</span>der
+                    </h3>
+                    <span class="text-[#FB2E86] ml-2 text-sm lg:text-base">{{allorders[0].cartItems.length}}
+                        items</span>
+                </div>
+
+                <!-- Mobile Card Layout -->
+                <div class="md:hidden space-y-4">
+                    @for (order of allorders; track order._id) {
+                    @for (cartItem of order.cartItems; track cartItem._id) {
+                    <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
+                        <div class="flex items-start gap-3">
+                            <img [src]="cartItem.product.imageCover" alt="{{cartItem.product.title}}"
+                                class="w-12 h-12 object-cover rounded flex-shrink-0">
+                            <div class="flex-grow min-w-0">
+                                <h4 class="font-semibold text-sm text-gray-900 truncate">
+                                    {{ cartItem.product.title }}
+                                </h4>
+                                <div class="mt-2 space-y-1 text-xs text-gray-600">
+                                    <div class="flex justify-between">
+                                        <span>Price:</span>
+                                        <span class="font-semibold">{{ cartItem.price }} EGP</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Quantity:</span>
+                                        <span class="font-semibold">{{ cartItem.count }}</span>
+                                    </div>
+                                    <div class="flex justify-between border-t pt-1">
+                                        <span>Total:</span>
+                                        <span class="font-bold text-[#FB2E86]">{{ cartItem.count * cartItem.price }}
+                                            EGP</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    }
+                </div>
+
+                <!-- Desktop Table Layout -->
+                <div class="hidden md:block">
+                    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow">
+                        <table class="min-w-full">
+                            <thead class="bg-gray-100 text-gray-600 uppercase text-xs lg:text-sm">
+                                <tr>
+                                    <th class="px-3 lg:px-6 py-3 text-left font-semibold">Item</th>
+                                    <th class="px-3 lg:px-6 py-3 text-center font-semibold">Cost</th>
+                                    <th class="px-3 lg:px-6 py-3 text-center font-semibold">Quantity</th>
+                                    <th class="px-3 lg:px-6 py-3 text-right font-semibold">Total Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                                @for (order of allorders; track order._id) {
+                                @for (cartItem of order.cartItems; track cartItem._id) {
+                                <tr>
+                                    <td class="px-3 lg:px-6 py-4 flex items-center gap-2 lg:gap-3">
+                                        <img [src]="cartItem.product.imageCover" alt="{{cartItem.product.title}}"
+                                            class="w-10 h-10 lg:w-12 lg:h-12 object-cover rounded flex-shrink-0" />
+                                        <span class="text-sm lg:text-base line-clamp-1">{{ cartItem.product.title
+                                            }}</span>
+                                    </td>
+                                    <td class="px-3 lg:px-6 py-4 text-center text-sm lg:text-base">{{ cartItem.price }}
+                                        EGP</td>
+                                    <td class="px-3 lg:px-6 py-4 text-center text-sm lg:text-base">{{ cartItem.count }}
+                                    </td>
+                                    <td class="px-3 lg:px-6 py-4 text-right font-semibold text-sm lg:text-base">{{
+                                        cartItem.count * cartItem.price }} EGP</td>
+                                </tr>
+                                }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="xl:col-span-4 bg-[#ded9fd] p-4 lg:p-6 rounded-2xl h-fit">
+                <h2 class="uppercase text-lg lg:text-xl mb-4 lg:mb-6 font-semibold">shipping details</h2>
+
+                <!-- Mobile Compact Layout -->
+                <div class="md:hidden space-y-3">
+                    <div class="bg-white/50 p-3 rounded-lg">
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div class="space-y-2">
+                                <div><span class="font-medium">Name:</span></div>
+                                <div><span class="font-medium">Phone:</span></div>
+                                <div><span class="font-medium">Email:</span></div>
+                            </div>
+                            <div class="space-y-2 text-right">
+                                <div>{{allorders[0].user.name}}</div>
+                                <div>{{allorders[0].user.phone}}</div>
+                                <div class="truncate">{{allorders[0].user.email}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/50 p-3 rounded-lg">
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div class="space-y-2">
+                                <div><span class="font-medium">Status:</span></div>
+                                <div><span class="font-medium">Paid:</span></div>
+                                <div><span class="font-medium">Method:</span></div>
+                            </div>
+                            <div class="space-y-2 text-right">
+                                <div [class]="allorders[0].isDelivered ? 'text-green-600 font-medium' : 'text-red-600'">
+                                    {{allorders[0].isDelivered ? 'Delivered' : 'Pending'}}
+                                </div>
+                                <div [class]="allorders[0].isPaid ? 'text-green-600 font-medium' : 'text-red-600'">
+                                    {{allorders[0].isPaid ? 'Paid' : 'Unpaid'}}
+                                </div>
+                                <div>{{allorders[0].paymentMethodType}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/50 p-3 rounded-lg">
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div class="space-y-2">
+                                <div><span class="font-medium">Tax:</span></div>
+                                <div><span class="font-medium text-lg">Total:</span></div>
+                            </div>
+                            <div class="space-y-2 text-right">
+                                <div>{{allorders[0].taxPrice}} EGP</div>
+                                <div class="font-bold text-lg text-[#FB2E86]">{{allorders[0].totalOrderPrice}} EGP</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Layout -->
+                <div class="hidden md:block space-y-4">
+                    <div class="flex justify-between items-center py-2 border-b border-gray-300/50">
+                        <span class="capitalize text-sm lg:text-base">full name:</span>
+                        <span class="text-sm lg:text-base font-medium">{{allorders[0].user.name}}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-2 border-b border-gray-300/50">
+                        <span class="capitalize text-sm lg:text-base">phone:</span>
+                        <span class="text-sm lg:text-base">{{allorders[0].user.phone}}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-2 border-b border-gray-300/50">
+                        <span class="capitalize text-sm lg:text-base">email:</span>
+                        <span class="text-sm lg:text-base truncate max-w-48">{{allorders[0].user.email}}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-2 border-b border-gray-300/50">
+                        <span class="capitalize text-sm lg:text-base">order status:</span>
+                        <span class="text-sm lg:text-base"
+                            [class]="allorders[0].isDelivered ? 'text-green-600 font-medium' : 'text-red-600'">
+                            {{allorders[0].isDelivered ? 'Delivered' : 'Pending'}}
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-2 border-b border-gray-300/50">
+                        <span class="capitalize text-sm lg:text-base">paid status:</span>
+                        <span class="text-sm lg:text-base"
+                            [class]="allorders[0].isPaid ? 'text-green-600 font-medium' : 'text-red-600'">
+                            {{allorders[0].isPaid ? 'Paid' : 'Unpaid'}}
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-2 border-b border-gray-300/50">
+                        <span class="capitalize text-sm lg:text-base">payment Method:</span>
+                        <span class="text-sm lg:text-base">{{allorders[0].paymentMethodType}}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-2 border-b border-gray-300/50">
+                        <span class="capitalize text-sm lg:text-base">tax Price:</span>
+                        <span class="text-sm lg:text-base">{{allorders[0].taxPrice}} EGP</span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-2 text-lg font-bold">
+                        <span class="capitalize">total Price:</span>
+                        <span class="text-[#FB2E86]">{{allorders[0].totalOrderPrice}} EGP</span>
+                    </div>
+                </div>
+
+                <button
+                    class="w-full bg-[#FB2E86] hover:bg-[#e5267a] text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 mt-6"
+                    routerLink="/home">
+                    Back to Home
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.card {
+  @apply max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg justify-center relative;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: var(--main-background);
+  box-sizing: border-box;
+}
+
+@layer components {
+  .btn {
+    @apply disabled:cursor-not-allowed disabled:border-gray-500 bg-[#E7E4F8] text-xl py-1 w-full text-center cursor-pointer mt-1 rounded-md border border-[#a8a0ce] hover:text-[#6b6491] hover:bg-transparent hover:text-shadow-2xs transition-all duration-300;
+  }
+
+  .main-input {
+    @apply block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#fd4393] focus:outline-none focus:ring-0 focus:border-[#fd4393];
+  }
+
+  .main-lable {
+    @apply capitalize absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-[#fd4393] peer-focus:dark:text-[#fd4393] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto;
+  }
+}
+
+:root {
+  --main-color: #FB2E86;
+  --main-background: #E7E4F8;
+}
+
+.btn-main {
+  background-color: var(--main-color);
+  padding: 7px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.btn-main:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+
+.btn-main:disabled:hover {
+  background-color: #ccc;
+}
+
+.btn-main:hover {
+  background-color: #fd4393;
+}

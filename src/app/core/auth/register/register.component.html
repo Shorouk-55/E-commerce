@@ -1,0 +1,60 @@
+<section class="py-7">
+    <div class="container">
+        <div class="shadow-2xl mx-auto p-3 my-5 md:w-1/2">
+            <h2 class="text-center text-3xl font-bold mb-5 mt-3">Create My Account<span class="text-[#fd4393]">!</span>
+            </h2>
+            <form [formGroup]="formRegister">
+
+                <app-input [control]="formRegister.get('name')" [typeInput]="'text'" [idInput]="'name'"
+                    [labelInput]="'name'"></app-input>
+
+
+                <app-input [control]="formRegister.get('email')" [typeInput]="'email'" [idInput]="'email'"
+                    [labelInput]="'email'"></app-input>
+
+
+                <app-input [control]="formRegister.get('password')" [idInput]="'password'" [labelInput]="'password'">
+                    Password must be at least 8 characters long and include at least one uppercase letter, one lowercase
+                    letter, one number, and one special character (@ $ ! % * ? &).
+                </app-input>
+
+
+                <app-input [control]="formRegister.get('rePassword')" [idInput]="'rePassword'"
+                    [labelInput]="'rePassword'"></app-input>
+
+
+                <app-input [control]="formRegister.get('phone')" [typeInput]="'tel'" [idInput]="'phone'"
+                    [labelInput]="'phone'">
+                    Phone must be 11 numbers start with 012, 01, 015
+                </app-input>
+
+
+            </form>
+            <div class="text-center">
+                <button [disabled]="isLoading" type="submit" (click)="register()" class="btn-main w-full my-3">Create My
+                    Account
+                    @if(isLoading){
+                    <i class="fa-solid fa-spinner animate-spin"></i>
+                    }
+                </button>
+            </div>
+            @if(errorMassage){
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <p>
+                        {{errorMassage}}
+                    </p>
+                </div>
+            </div>
+            }
+        </div>
+
+    </div>
+</section>

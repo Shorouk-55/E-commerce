@@ -1,0 +1,41 @@
+<section class="py-7">
+    <div class="container">
+        <div class="shadow-2xl mx-auto p-3 my-5 md:w-1/2">
+            <h2 class="text-center text-3xl font-bold mb-5 mt-3">Logi<span class="text-[#fd4393]">n</span> to My Account
+                <i class="text-[#fd4393] fa-regular fa-circle-right text-xl"></i>
+            </h2>
+            <form [formGroup]="formLogin" (ngSubmit)="login()">
+
+                <app-input [control]="formLogin.get('email')" [typeInput]="'email'" [idInput]="'email'"
+                    [labelInput]="'email'"></app-input>
+
+
+                <app-input [control]="formLogin.get('password')" [idInput]="'password'" [labelInput]="'password'">
+                    incorrect password pattern
+                </app-input>
+
+
+                <button [disabled]="isLoading" type="submit" class="btn-main w-full my-3">Login
+                    @if(isLoading){
+                    <i class="fa-solid fa-spinner animate-spin"></i>
+                    }
+                </button>
+                @if(messageError){
+                <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    role="alert">
+                    <span class="sr-only">Danger</span>
+                    <div>
+                        <ul class="mt-1.5 list-disc list-inside">
+                            <li>{{messageError}}</li>
+                        </ul>
+                    </div>
+                </div>
+                }
+
+                <a class="cursor-pointer capitalize underline text-gray-500 " routerLink="/forgetpassword">forget
+                    password</a>
+            </form>
+        </div>
+
+    </div>
+</section>

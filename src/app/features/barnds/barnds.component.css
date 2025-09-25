@@ -1,0 +1,5 @@
+ ::ng-deep .ngx-pagination .current {
+     background: #fd4393 !important;
+     border-radius: 30%;
+
+ }

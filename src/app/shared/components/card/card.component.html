@@ -1,0 +1,62 @@
+<!-- <div class="card overflow-hidden group/card px-2 py-1"> -->
+<!-- <div class="w-full border border-gray-300 rounded-2xl overflow-hidden">
+            <img class="w-full h-auto object-contain" [src]="product.imageCover" alt="{{product.slug}}" />
+        </div> -->
+<div class=" parent justify-center my-5 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+    @for(product of allproducts() ; track product){
+    <div class="group bg-white rounded-2xl shadow-md hover:shadow-xl 
+                            transition-all duration-300 transform hover:-translate-y-1
+                            border border-gray-100 overflow-hidden cursor-pointer group/card px-1">
+        <a [routerLink]="['/details', product.slug, product._id]">
+
+            <!-- image container -->
+            <div class="relative overflow-hidden">
+                <a class="block aspect-square relative" [attr.aria-label]="'View ' + product.title">
+                    <img class="w-full object-cover transition-transform duration-300 
+                                group-hover:scale-105" [src]="product.imageCover" [alt]="product.title + ' logo'"
+                        onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgNzBDMTA4LjI4NCA3MCA5NS4wMDM5IDc4LjI4NDMgOTUuMDAzOSA4OC41Vjg4LjVWMTExLjVDOTUuMDAzOSAxMjEuNzE2IDEwMy4yODggMTMwIDExMy41MDQgMTMwSDEzNi40OTZDMTQ2LjcxMiAxMzAgMTU0Ljk5NiAxMjEuNzE2IDE1NC45OTYgMTExLjVWODguNUM5NS4wMDM5IDc4LjI4NDMgOTEuNzE2IDcwIDEwMCA3MFoiIGZpbGw9IiM5Q0E0QUYiLz4KPHN2Zz4K'" />
+                    <!-- Loading shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent 
+                                opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full 
+                                group-hover:translate-x-full transition-all duration-700"></div>
+                </a>
+            </div>
+            <!-- content container -->
+            <div class="p-2">
+                <div class="flex items-center justify-between">
+                    <h5 class="mb-2 font-bold tracking-tight text-gray-900">
+                        {{ product.title | split: 2 }}
+                    </h5>
+
+                    @if (!isInWishlist(product._id)) {
+                    <i (click)="addProductToWishList(product._id, $event)"
+                        class="fa-regular fa-heart cursor-pointer"></i>
+                    } @else {
+                    <i (click)="removeProductFromWishList(product._id, $event)"
+                        class="fa-solid fa-heart text-red-500 cursor-pointer"></i>
+                    }
+                </div>
+
+                <p class="mb-3 text-sm font-normal text-gray-700 dark:text-gray-400 line-clamp-1">
+                    {{ product.description }}
+                </p>
+
+                <div class="rateing flex justify-between items-center">
+                    <span class="uppercase">{{ product.price | currency:' ' }} egp</span>
+                    <span>
+                        <i class="text-yellow-300 fa-solid fa-star"></i> {{ product.ratingsAverage }}
+                    </span>
+                </div>
+            </div>
+
+        </a>
+        <button (click)="addProductToCart(product._id)"
+            class="btn pb-1 md:translate-y-[120%] group-hover/card:-translate-y-2">
+            Add to cart
+        </button>
+    </div>
+    }
+
+</div>
+
+<!-- </div> -->

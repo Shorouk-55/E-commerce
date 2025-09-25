@@ -1,0 +1,101 @@
+<section class="md:my-4">
+    <div class="p-5 md:p-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+            <!-- Cart Section -->
+            <div class="md:col-span-8 bg-[#ded9fd] p-4 rounded-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="mb-4">
+                        <h3 class="text-4xl inline">Cart</h3>
+                        <span class="text-[#FB2E86]">{{ numberOfItems }} items</span>
+                    </div>
+                    <div class="relative inline-block text-[#FB2E86] text-l " (mouseenter)="mesg = true"
+                        (mouseleave)="mesg = false" (click)="deleteAllProducts()">
+                        <button [class.cursor-pointer]="numberOfItems != 0"
+                            [class.cursor-not-allowed]="numberOfItems == 0"><i class="fa-solid fa-trash"></i></button>
+
+                        @if(mesg && numberOfItems!=0){
+                        <span
+                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-white text-black text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg z-10">
+                            delete all
+                        </span>
+                        }
+                    </div>
+
+                </div>
+                @if(numberOfItems === 0){
+                <div class="p-3 rounded-sm shadow-xl my-5">
+                    <p class="text-2xl">no product yet!</p>
+                </div>
+                }
+
+                <!-- Cart Items -->
+                @if (allProducts&&allProducts.products) {
+                @for (item of allProducts.products; track item.product._id) {
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center mb-4 p-3 bg-white rounded-xl">
+                    <!-- Product Image -->
+                    <div class="sm:col-span-2 flex justify-center sm:justify-start">
+                        <img [src]="item.product.imageCover" [alt]="item.product.title" class="size-18 rounded-md" />
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="sm:col-span-10 flex  sm:flex-row justify-between items-center w-full">
+                        <div>
+                            <h3 class="text-xl line-clamp-1">{{ item.product.title }}</h3>
+                            <div class="flex items-center gap-3 mt-2">
+                                <div class="flex items-center gap-3 px-3 py-1 border border-[#FB2E86] rounded-2xl">
+                                    <button [disabled]="counter[$index] === 0 "
+                                        (click)="counter[$index]-=1;updateCartItem(item,$index)"
+                                        class="cursor-pointer"><i class="fa-solid fa-minus"></i></button>
+                                    <span>{{ counter[$index]}}</span>
+                                    <button (click)="counter[$index]+=1;updateCartItem(item,$index)"
+                                        class="cursor-pointer"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                                <i (click)="deleteItemOfCard(item.product._id)"
+                                    class="fa-solid fa-trash text-[#FB2E86]  cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <div class="text-right mt-2 sm:mt-0">
+                            <p class="text-l text-[#333] font-semibold uppercase">{{ item.price | currency:' '}} egp</p>
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+                <!-- more orders -->
+
+                <hr class=" text-[#ccc8e6]">
+                <div class="flex items-center cursor-pointer border-[#FB2E86] rounded-2xl" routerLink="/products">
+                    <i class="fa-solid fa-plus"></i>
+                    @if(numberOfItems>0){
+                    <p>add more orders</p>
+                    }
+                    @else {
+                    <p>add orders</p>
+                    }
+                </div>
+
+
+
+
+                <!-- End Cart Items -->
+            </div>
+
+            <!-- Order Summary -->
+            <div class="md:col-span-4 bg-[#ded9fd] p-4 rounded-2xl h-fit">
+                <h2 class="uppercase text-lg font-semibold mb-4">Order Summary</h2>
+                <div class="flex justify-between mb-4">
+                    <span class="capitalize text-gray-700">Total Price</span>
+                    @if (allProducts&&allProducts.totalCartPrice) {
+
+                    <span class="text-lg font-bold">{{ allProducts.totalCartPrice }}</span>
+                    }
+                </div>
+                @if(allProducts&&allProducts._id){
+
+                <button [routerLink]="['/checkout', allProducts._id]" class="btn-main w-full">
+                    Proceed to Checkout</button>
+                }
+            </div>
+        </div>
+    </div>
+</section>
